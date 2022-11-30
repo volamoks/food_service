@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //timer
   //
   //
-  const deadLine = "2020-12-01";
+  const deadLine = "2021-12-05";
   function getTimeremaining(endTime) {
     let days, hours, minutes, seconds;
     const t = Date.parse(endTime) - Date.parse(new Date());
@@ -66,7 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  function getZero(num) {
+  function getZero(num
+    ) {
     if (num < 10 && num >= 0) {
       return `0${num}`;
     } else {
@@ -100,15 +101,39 @@ document.addEventListener("DOMContentLoaded", () => {
   // modal window
   //
   //
-  const modalTrigger = document.querySelector("[data-modal]"),
+  const modalTrigger = document.querySelectorAll("[data-modal]"),
     modal = document.querySelector(".modal"),
     modalCloseBtn = document.querySelector("[data-close]");
 
-  modalTrigger.addEventListener("click", () => {
-    modal.classList.add("show"), modal.classList.remove("hide");
+  modalTrigger.forEach((btn) =>{
+    btn.addEventListener("click", () => {
+    // modal.classList.add("show"), 
+    // modal.classList.remove("hide");\
+    modal.classList.toggle('show')
+    document.body.style.overflow ='hidden'
+  })
+  
   });
 
-  modalCloseBtn.addEventListener("click", () => {
-    modal.classList.remove("show"), modal.classList.add("hide");
-  });
+  function closeModal() {
+      modal.classList.toggle('show')
+      document.body.style.overflow ='';
+
+  }
+  modalCloseBtn.addEventListener("click", closeModal);
+  
+modal.addEventListener('click', (e)=>{
+  if(e.target === modal ){
+    closeModal()
+  }
+})
+
+document,addEventListener('keydown', (e) =>{
+  if (e.code === 'Escape' && modal.classList.contains('show')) {
+    closeModal();
+  }
+})  
+
 });
+
+
